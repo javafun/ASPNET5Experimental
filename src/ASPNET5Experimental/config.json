@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "ASPNET5Experimental"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-ASPNET5Experimental-7bb95879-1536-452f-811f-96587e748fa9;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}

@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace ASPNET5Experimental.Controllers
 {
@@ -10,6 +12,10 @@ namespace ASPNET5Experimental.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.UserName = User.Identity.Name;
+            }
             return View();
         }
 

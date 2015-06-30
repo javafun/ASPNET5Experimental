@@ -21,6 +21,9 @@ using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using ASPNET5Experimental.Models;
+using ASPNET5Experimental.Entities;
+using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json.Serialization;
 
 namespace ASPNET5Experimental
 {
@@ -78,7 +81,19 @@ namespace ASPNET5Experimental
             });
 
             // Add MVC services to the services container.
-            services.AddMvc();
+            services.AddMvc().Configure<MvcOptions>(options =>
+            {
+                options.OutputFormatters
+                        .Where(f => f.Instance is JsonOutputFormatter)
+                        .Select(f => f.Instance as JsonOutputFormatter)
+                        .First()
+                        .SerializerSettings
+                        .ContractResolver = new CamelCasePropertyNamesContractResolver();                
+            });
+
+
+            services.AddTransient(typeof(CourseRepository), typeof(CourseRepository));
+            services.AddTransient(typeof(CourseTrackerRepository), typeof(CourseTrackerRepository));
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
@@ -86,8 +101,21 @@ namespace ASPNET5Experimental
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, ApplicationDbContext context)
         {
+            // Seeding data as EF7 doesn't support seeding data
+            if (context.Courses.FirstOrDefault() == null)
+            {
+                context.Courses.Add(new Course { Title = "Basics of ASP.NET 5", Author = "Mahesh", Duration = 4 });
+                context.Courses.Add(new Course { Title = "Getting started with Grunt", Author = "Ravi", Duration = 3 });
+                context.Courses.Add(new Course { Title = "What's new in Angular 1.4", Author = "Ravi", Duration = 4 });
+                context.Courses.Add(new Course { Title = "Imagining JavaScript in ES6", Author = "Suprotim", Duration = 4 });
+                context.Courses.Add(new Course { Title = "C# Best Practices", Author = "Craig", Duration = 3 });
+
+                context.SaveChanges();
+            }
+
+
             // Configure the HTTP request pipeline.
 
             // Add the console logger.

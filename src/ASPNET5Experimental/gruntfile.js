@@ -1,6 +1,12 @@
 /// <binding AfterBuild='default' />
 module.exports = function (grunt) {
     grunt.initConfig({
+        clean: {
+            options: {
+                folders: true
+            },
+            build: ["wwwroot/dist/**"]
+        },
         bowercopy: {
             options: {
                 runBower: true,
@@ -25,9 +31,9 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            options: {
-                separator: ';'
-            },
+            //options: {
+            //    separator: ';'
+            //},
             dist: {
                 src: ['wwwroot/dist/*.js'],
                 dest: 'wwwroot/dist/appCombined.js'
@@ -45,10 +51,11 @@ module.exports = function (grunt) {
     });
 
     // This command registers the default task which will install bower packages into wwwroot/lib
-    grunt.registerTask("default", ["bowercopy:libs", "html2js", "copy:main", "concat"]);
+    grunt.registerTask("default", ["clean:build","bowercopy:libs", "html2js", "copy:main", "concat"]);
 
     // The following line loads the grunt plugins.
     // This line needs to be at the end of this  file.
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-bower-task");
     grunt.loadNpmTasks("grunt-bowercopy");
     grunt.loadNpmTasks("grunt-contrib-copy");

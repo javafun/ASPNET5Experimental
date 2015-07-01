@@ -12,11 +12,6 @@
                 controller: 'courseTrackCtrl',
                 controllerAs: 'vm'
             })
-            .when('/courseTracks2', {
-                templateUrl: 'App/Templates/courseTracks.html',
-                controller: 'courseTrackCtrl',
-                controllerAs: 'vm'
-            })
             .otherwise({ redirectTo: '/courseList' });
         }]);
 }());

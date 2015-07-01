@@ -40,8 +40,12 @@ module.exports = function (grunt) {
             }
         },
         html2js: {
-            options: {
-                module: 'virtualTrainingTemplates'
+            options: {                
+                module: 'virtualTrainingTemplates',
+                htmlmin: {                    
+                    collapseWhitespace: true,                    
+                    removeComments: true,                    
+                }
             },
             main: {
                 src: ['App/Templates/*.html'],
@@ -51,7 +55,7 @@ module.exports = function (grunt) {
     });
 
     // This command registers the default task which will install bower packages into wwwroot/lib
-    grunt.registerTask("default", ["clean:build","bowercopy:libs", "html2js", "copy:main", "concat"]);
+    grunt.registerTask("default", ["clean:build", "bowercopy:libs", "html2js:main", "copy:main", "concat"]);
 
     // The following line loads the grunt plugins.
     // This line needs to be at the end of this  file.

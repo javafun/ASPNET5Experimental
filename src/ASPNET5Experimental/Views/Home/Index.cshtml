@@ -3,23 +3,23 @@
 }
 
 <div class="row" ng-app="virtualTrainingApp">
-<h1>Test</h1>
+
     <div class="col-md-2" ng-controller="navigationCtrl as nav" ng-show="nav.isAuthenticated">
-        {{nav.isAuthenticated}}
+        <h1>@ViewBag.UserName</h1>
+        
         <ul class="nav nav-list">
             <li ng-repeat="navigationItem in nav.navigationList"><a ng-href="{{navigationItem.url}}">{{navigationItem.text}}</a></li>
         </ul>
     </div>
     <div class="col-md-10">
-        <!-- <div ng-view=""></div> -->        
+         <div ng-view=""></div> 
 
     </div>
 </div>
 
 
 @section userScript{
-    <script>
-        alert("test");
-        window.userName = "@ViewBag.UserName";
-    </script>
+<script>
+    window.userName = "@ViewBag.UserName";
+</script>
 }

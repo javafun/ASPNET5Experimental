@@ -135,6 +135,8 @@ namespace ASPNET5Experimental
                 app.UseErrorHandler("/Home/Error");
             }
 
+            //app.UseDirectoryBrowser();
+
             // Add static files to the request pipeline.
             app.UseStaticFiles();
 

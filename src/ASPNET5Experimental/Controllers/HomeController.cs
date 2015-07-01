@@ -12,6 +12,8 @@ namespace ASPNET5Experimental.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.UserName = "Faked User";
+
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.UserName = User.Identity.Name;

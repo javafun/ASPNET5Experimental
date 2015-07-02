@@ -40,7 +40,8 @@ module.exports = function (grunt) {
             }
         },
         html2js: {
-            options: {                
+            options: {
+                base:"./",
                 module: 'virtualTrainingTemplates',
                 htmlmin: {                    
                     collapseWhitespace: true,                    

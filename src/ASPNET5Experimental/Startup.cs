@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ASPNET5Experimental.Entities;
+using ASPNET5Experimental.Models;
 using Microsoft.AspNet.Authentication.Facebook;
-using Microsoft.AspNet.Authentication.Google;
 using Microsoft.AspNet.Authentication.MicrosoftAccount;
-using Microsoft.AspNet.Authentication.Twitter;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Routing;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.Logging.Console;
-using Microsoft.Framework.Runtime;
-using ASPNET5Experimental.Models;
-using ASPNET5Experimental.Entities;
-using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Serialization;
+using System.Linq;
 
 namespace ASPNET5Experimental
 {
@@ -88,9 +78,8 @@ namespace ASPNET5Experimental
                         .Select(f => f.Instance as JsonOutputFormatter)
                         .First()
                         .SerializerSettings
-                        .ContractResolver = new CamelCasePropertyNamesContractResolver();                
+                        .ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
-
 
             services.AddTransient(typeof(CourseRepository), typeof(CourseRepository));
             services.AddTransient(typeof(CourseTrackerRepository), typeof(CourseTrackerRepository));
@@ -114,7 +103,6 @@ namespace ASPNET5Experimental
 
                 context.SaveChanges();
             }
-
 
             // Configure the HTTP request pipeline.
 

@@ -12,7 +12,7 @@ namespace ASPNET5Experimental.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.UserName = "Faked User";
+            ViewBag.UserName = "Faked User 11";
 
             if (User.Identity.IsAuthenticated)
             {
